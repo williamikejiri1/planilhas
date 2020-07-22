@@ -1,0 +1,187 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Jun 18 17:25:01 2020
+
+@author: William Ikejiri
+"""
+import datetime
+import calendar
+from datetime import date
+
+#------------------------------------------------------------------------------
+#Funcao para gerar calendario
+def gerar_calendario():
+    
+    year = int(input("Ano do calendario: "))
+    month = int(input("Mes do calendario: "))
+    print()
+    
+    c = calendar.TextCalendar(calendar.SUNDAY) 
+    str= c.formatmonth(year,month)
+    print(str)
+    
+    days = calendar.mdays[month+1]
+    print(days)
+    # days = c.itermonthdays(2020,8)
+    # print(days)
+
+#Funcao para gerar datas 2 ------------------------------------------------------
+
+def gerar_datas():
+    
+    DIAS = [
+        'Segunda-feira',
+        'Terça-feira',
+        'Quarta-feira',
+        'Quinta-Feira',
+        'Sexta-feira',
+        'Sábado',
+        'Domingo'
+    ]
+    
+    dt = datetime.datetime(2020, 7, 7)
+    end = datetime.datetime(2022, 7, 7)
+    step = datetime.timedelta(minutes=30)
+    result = []
+    
+    while dt < end:
+        result.append(dt.strftime('%Y-%m-%d-%H'))
+        dt += step
+    
+    print("Dias")
+    print()
+    for i in result:
+         
+        print(i)
+    
+    return result
+    # data = i
+    # print(data)
+    # indice_da_semana = data.weekday()
+    # print(indice_da_semana)
+    # dia_da_semana = DIAS[indice_da_semana]
+    # print(dia_da_semana)
+
+    #Match holidays with dates
+
+#---------------------------------------------------------------
+#Criando listas para perfis de hospitais
+
+hospital = []
+valor_hora = []
+quantidade_horas = []
+valor_paciente = []
+numero_de_pacientes_dia = []
+inicio = []
+termino = []
+data_maxima = []
+descontos1dia = []
+descontos1mes = []
+descontos2dia = []
+descontos2mes = []
+
+valor_dia = 0
+
+
+hospital = hospital
+valor_hora = list(map(int,valor_hora))
+quantidade_horas = list(map(int,quantidade_horas))
+valor_paciente = list(map(int,valor_paciente))
+numero_de_pacientes_dia = list(map(int,numero_de_pacientes_dia))
+inicio = list(map(int,inicio))
+termino = list(map(int,termino))
+data_maxima = list(map(int,data_maxima))
+descontos1dia = list(map(int,descontos1dia))
+descontos1mes = list(map(int,descontos1mes))
+descontos2dia = list(map(int,descontos2dia))
+descontos2mes = list(map(int,descontos2mes))
+
+#-----------------------------------------------------------------------
+#Funcao para criar perfis
+def criar_perfil():
+    
+    recursive = "sim"
+    k=1
+    while recursive != "nao" and k<20:
+        hospital1 = input("Hospital: ")
+        valor_hora1 = float(input("Valor hora: R$"))
+        quantidade_horas1 = float(input("Quantidade de horas dia: "))
+        valor_paciente1 = float(input("Valor por paciente: R$"))
+        numero_de_pacientes_dia1 = int(input("Numero de pacientes dia: "))
+        inicio1 = int(input("Inicio de apuracao: "))
+        termino1 = int(input("Termino de apuracao: "))
+        data_maxima1 = int(input("Data maxima de pagamento: "))
+        descontos1_dia = float(input("Descontos em % por dia: "))
+        descontos1_dia = descontos1_dia/100
+        descontos1_mes = float(input("Descontos em % por mes: "))
+        descontos1_mes = descontos1_mes/100
+        descontos2_dia = float(input("Descontos em R$ por dia: "))
+        descontos2_mes = float(input("Descontos em R$ por mes: "))
+        
+        hospital.append(hospital1)
+        valor_hora.append(valor_hora1)
+        quantidade_horas.append(quantidade_horas1)
+        valor_paciente.append(valor_paciente1)
+        numero_de_pacientes_dia.append(numero_de_pacientes_dia1)
+        inicio.append(inicio1)
+        termino.append(termino1)
+        data_maxima.append(data_maxima1)
+        descontos1dia.append(descontos1_dia)
+        descontos1mes.append(descontos1_mes)
+        descontos2dia.append(descontos2_dia)
+        descontos2mes.append(descontos2_mes)
+        
+        recursive = input("Deseja adiciona outro perfil de hospital? (sim/nao)")
+        k += 1
+        print(hospital, valor_hora, quantidade_horas, valor_paciente, numero_de_pacientes_dia, inicio, termino, data_maxima, descontos1dia, descontos1mes, descontos2dia, descontos2mes)
+        print()  
+        
+#----------------------------------------------------------------
+#Funcao para calcular faturamento do dia para cada hospital
+def faturamento_dia():
+    
+    valor_dia=0
+    for x in range(len(hospital)):
+         
+        faturamento_dia = valor_hora[x] * quantidade_horas[x]
+        faturamento_dia += valor_paciente[x] * numero_de_pacientes_dia[x]
+        descontos = faturamento_dia * descontos1dia[x]
+        descontos += descontos2dia[x]
+        faturamento_dia -= descontos
+        
+        valor_dia += faturamento_dia
+          
+        print("Faturamento dia para hospital "+ hospital[x] + ":")
+        print(faturamento_dia)
+        print()
+
+    print("Total do dia: ")
+    print(valor_dia)         
+
+#----------------------------------------------------------------------
+#Funcao para calcular faturamento mes
+def faturamento_mes():
+    year = int(input("Ano do mes: "))
+    month = int(input("Mes do faturamento: "))
+    
+    days = calendar.mdays[month+1]
+    faturamento = 
+# for dias do mes adicionar faturamento dia de acordo com termino de apuracao
+# Tirar desconto
+        
+    # def pagamento():
+        
+    #     # for inicio e termino de apuracao adicionar pagamentos
+
+
+#-----------------------------------------------------------------------
+#Main
+# print("Funcao para retornar dias da semana")
+# gerar_datas()
+# print()
+
+# print("Testando funcao para criar perfis de hospitais")
+# criar_perfil()
+# faturamento_dia()
+    
+gerar_calendario()
