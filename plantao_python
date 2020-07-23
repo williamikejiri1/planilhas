@@ -8,28 +8,7 @@ import datetime
 import calendar
 from datetime import date
 
-#------------------------------------------------------------------------------
-#Funcao para gerar calendario
-def gerar_calendario():
-    
-    year = int(input("Ano do calendario: "))
-    month = int(input("Mes do calendario: "))
-    print()
-    
-    c = calendar.TextCalendar(calendar.SUNDAY) 
-    str= c.formatmonth(year,month)
-    print(str)
-    
-    days = calendar.mdays[month+1]
-    print(days)
-    # days = c.itermonthdays(2020,8)
-    # print(days)
-
-#Funcao para gerar datas 2 ------------------------------------------------------
-
-def gerar_datas():
-    
-    DIAS = [
+DIAS = [
         'Segunda-feira',
         'Terça-feira',
         'Quarta-feira',
@@ -38,6 +17,28 @@ def gerar_datas():
         'Sábado',
         'Domingo'
     ]
+
+#------------------------------------------------------------------------------
+#Funcao para gerar calendario
+def gerar_calendario():
+    
+    year = int(input("Ano do calendario: "))
+    month = int(input("Mes do calendario: "))
+    print()
+    
+    c = calendar.TextCalendar(calendar.SUNDAY).formatyear(year)
+    #str= c.formatmonth(year,month)
+    print(c)
+    
+    days = calendar.mdays[month+1]
+    print("Dias no mes escolhido: ")
+    print(days)
+    # days = c.itermonthdays(2020,8)
+    # print(days)
+
+#Funcao para gerar datas 2 ------------------------------------------------------
+
+def gerar_datas():
     
     dt = datetime.datetime(2020, 7, 7)
     end = datetime.datetime(2022, 7, 7)
@@ -140,7 +141,7 @@ def criar_perfil():
 #Funcao para calcular faturamento do dia para cada hospital
 def faturamento_dia():
     
-    valor_dia=0
+    valor_dia=[]
     for x in range(len(hospital)):
          
         faturamento_dia = valor_hora[x] * quantidade_horas[x]
@@ -155,17 +156,26 @@ def faturamento_dia():
         print(faturamento_dia)
         print()
 
+    valor_dia.append(faturamento_dia) #CUIDADO, LEMBRAR DE MAPEAR OS VALORES APENDIDOS
     print("Total do dia: ")
-    print(valor_dia)         
+    print(valor_dia)
+    return valor_dia
 
-#----------------------------------------------------------------------
+#---------------------------------------------------------------------------------
 #Funcao para calcular faturamento mes
-def faturamento_mes():
-    year = int(input("Ano do mes: "))
-    month = int(input("Mes do faturamento: "))
     
+def faturamento_mes():
+    year = int(input("Ano: "))
+    month = int(input("Mes do faturamento: "))
+
+    faturamento=0
     days = calendar.mdays[month+1]
-    faturamento = 
+
+    for x in range(days):
+        faturamento += valor_dia
+        descontos = faturamento * descontos2mes[x]
+        descontos += descontos2mes[x]
+        faturamento -= descontos
 # for dias do mes adicionar faturamento dia de acordo com termino de apuracao
 # Tirar desconto
         
@@ -174,7 +184,7 @@ def faturamento_mes():
     #     # for inicio e termino de apuracao adicionar pagamentos
 
 
-#-----------------------------------------------------------------------
+#----------------------------------------------------------------------------------
 #Main
 # print("Funcao para retornar dias da semana")
 # gerar_datas()
